@@ -23,7 +23,7 @@ bot.use(stage.middleware());
 
 bot.start(ctx => {
   ctx.replyWithPhoto(
-    { source: 'D:\\projects\\tgbot_nestjs\\i.webp' },
+    { source: './image/welcome_image.jpg' },
     {
       caption: 'Приветствую в <b>Grand House Bot</b>\n\n' +
         'выберете интересующий вас вариант',
@@ -33,7 +33,23 @@ bot.start(ctx => {
   );
 });
 
+// Обработчик всех текстовых сообщений, который дублирует сообщения в чат менеджеров
+bot.on('text', async (ctx,next) => {
+  // Получаем текст сообщения пользователя
+  const userMessage = ctx.message.text;
 
+  // Отправляем сообщение в чат менеджеров
+  try {
+    // Отправляем сообщение в чат с менеджерами, используя chat_id из переменных окружения
+    await ctx.telegram.sendMessage(
+      process.env.MANAGER_CHAT_ID!,
+      `Пользователь: @${ctx.from?.username || 'без имени'}\nСообщение: ${userMessage}`
+    );
+  } catch (error) {
+    console.error('Ошибка при отправке сообщения менеджерам:', error);
+  }
+  await next();
+})
 bot.hears('пострйока дома', (ctx) => {
   ctx.scene.enter('home-building'); // Вход в сцену
 });
@@ -51,3 +67,4 @@ bot.launch();
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+
