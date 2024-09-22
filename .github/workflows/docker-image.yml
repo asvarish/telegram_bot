@@ -22,9 +22,9 @@ jobs:
           password: ${{ secrets.SSH_PRIVATE_KEY }}  # Используйте SSH-ключ для безопасности
           port: 22
           script: |
-            cd /grandhouse-tgbot  # Путь к вашему проекту на сервере
+            cd /home/grandhouse/telegram_bot  # Путь к вашему проекту на сервере
             git pull origin main      # Обновляем код с GitHub
             docker build -t tg-bot .  # Собираем Docker-образ локально на сервере
             docker stop tg-bot || true
             docker rm tg-bot || true
-            docker run -d --name tg-bot -p 3000:3000 --env-file /grandhouse-tgbot.env tg-bot
+            docker run -d --name tg-bot -p 3000:3000 --env-file /home/grandhouse/telegram_bot/.env tg-bot
