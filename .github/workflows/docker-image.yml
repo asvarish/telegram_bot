@@ -24,7 +24,7 @@ jobs:
           debug: true  # Включает отладку
           script: |
             cd /home/grandhouse/telegram_bot  # Путь к вашему проекту на сервере
-            git pull origin main      # Обновляем код с GitHub
+            git pull origin master      # Обновляем код с GitHub
             docker build -t tg-bot .  # Собираем Docker-образ локально на сервере
             docker stop tg-bot || true
             docker rm tg-bot || true
