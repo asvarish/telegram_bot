@@ -22,13 +22,15 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}  # Используйте SSH-ключ для безопасности
           port: 22
           debug: true  # Включает отладку
-          script: |
+           script: |
             cd /home/grandhouse/telegram_bot
-            git pull origin master  # Обновите ветку на правильную, если это 'master'
-            # Останавливаем старый контейнер, если он существует
+            git pull origin master
+            # Проверка и освобождение порта 3000
+            sudo lsof -t -i:3000 | xargs sudo kill -9 || true
+            # Останавливаем и удаляем контейнер, если он существует
             docker stop tg-bot || true
             docker rm tg-bot || true
-            # Собираем Docker-образ
+            # Собираем новый образ Docker
             docker build -t tg-bot .
-            # Запускаем новый контейнер на порту 3000
+            # Запуск нового контейнера
             docker run -d --name tg-bot -p 3000:3000 --env-file /home/grandhouse/telegram_bot/.env tg-bot
