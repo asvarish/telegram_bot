@@ -21,6 +21,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}  # Используйте SSH-ключ для безопасности
           port: 22
+          debug: true  # Включает отладку
           script: |
             cd /home/grandhouse/telegram_bot  # Путь к вашему проекту на сервере
             git pull origin main      # Обновляем код с GitHub
