@@ -15,7 +15,7 @@ jobs:
 
       # Подключаемся к серверу через SSH
       - name: Deploy to Server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@0.1.4
         with:
           host: ${{ SECRET_FOR_TG_BOT.SERVER_HOST }}
           username: ${{ SECRET_FOR_TG_BOT.SERVER_USERNAME }}
