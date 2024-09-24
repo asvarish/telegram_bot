@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}  # Используйте SSH-ключ для безопасности
           port: 22
           debug: true  # Включает отладку
-           script: |
+          script: |
             cd /home/grandhouse/telegram_bot
             git pull origin master
             # Проверка и освобождение порта 3000
