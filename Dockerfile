@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Команда для запуска приложения через npm start
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]
