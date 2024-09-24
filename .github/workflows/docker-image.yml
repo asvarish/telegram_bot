@@ -23,9 +23,12 @@ jobs:
           port: 22
           debug: true  # Включает отладку
           script: |
-            cd /home/grandhouse/telegram_bot  # Путь к вашему проекту на сервере
-            git pull origin master      # Обновляем код с GitHub
-            docker build -t tg-bot .  # Собираем Docker-образ локально на сервере
+            cd /home/grandhouse/telegram_bot
+            git pull origin master  # Обновите ветку на правильную, если это 'master'
+            # Останавливаем старый контейнер, если он существует
             docker stop tg-bot || true
             docker rm tg-bot || true
+            # Собираем Docker-образ
+            docker build -t tg-bot .
+            # Запускаем новый контейнер на порту 3000
             docker run -d --name tg-bot -p 3000:3000 --env-file /home/grandhouse/telegram_bot/.env tg-bot
