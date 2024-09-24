@@ -17,9 +17,9 @@ jobs:
       - name: Deploy to Server
         uses: appleboy/ssh-action@0.1.4
         with:
-          host: ${{ SECRET_FOR_TG_BOT.SERVER_HOST }}
-          username: ${{ SECRET_FOR_TG_BOT.SERVER_USERNAME }}
-          password: ${{ SECRET_FOR_TG_BOT.SERVER_PASSWORD }}  # Используйте SSH-ключ для безопасности
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}  # Используйте SSH-ключ для безопасности
           port: 22
           debug: true  # Включает отладку
           script: |
