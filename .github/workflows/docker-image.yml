@@ -25,8 +25,6 @@ jobs:
           script: |
             cd /home/grandhouse/telegram_bot
             git pull origin master
-            # Проверка и освобождение порта 3000
-            sudo lsof -t -i:3000 | xargs sudo kill -9 || true
             # Останавливаем и удаляем контейнер, если он существует
             docker stop tg-bot || true
             docker rm tg-bot || true
